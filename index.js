@@ -1,6 +1,7 @@
 import * as dotenv from "dotenv";
 import express from "express";
 import sequelize from "./app/db/database.js";
+import MessageContact from "./app/models/messageContactModel.js";
 
 dotenv.config();
 
@@ -12,6 +13,7 @@ async function main() {
     try {
         await sequelize.authenticate();
         console.log("✅ Connexion à la base réussie");
+        sequelize.sync({ alter: true });
 
         app.listen(port, () => {
             console.log(`🚀 Serveur lancé sur http://localhost:${port}`);
@@ -21,9 +23,6 @@ async function main() {
     }
 }
 
-// Lancement du serveur
-// app.listen(port, () => {
-//     console.log(`Serveur démarré sur http://localhost:${port}`);
-// });
+
 
 main();

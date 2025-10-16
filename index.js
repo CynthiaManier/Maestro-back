@@ -1,7 +1,9 @@
 import * as dotenv from "dotenv";
 import express from "express";
 import sequelize from "./app/db/database.js";
+import MessageContact from "./app/models/messageContactModel.js";
 import { User, Projet, Company } from "./app/models/index.js";
+
 
 dotenv.config();
 
@@ -22,5 +24,6 @@ async function main() {
         console.error("❌ Erreur de connexion à la base :", error);
     }
 }
+
 
 main();

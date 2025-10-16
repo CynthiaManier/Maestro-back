@@ -1,9 +1,9 @@
 import * as dotenv from "dotenv";
 import express from "express";
 import sequelize from "./app/db/database.js";
-// import Preview from "./app/models/previewModel.js";
-// import Genre from "./app/models/genreModel.js";
-import { Preview, Genre } from "./app/models/index.js";
+import MessageContact from "./app/models/messageContactModel.js";
+import { User, Projet, Company, Preview, Genre } from "./app/models/index.js";
+
 
 dotenv.config();
 
@@ -25,9 +25,5 @@ async function main() {
     }
 }
 
-// Lancement du serveur
-// app.listen(port, () => {
-//     console.log(`Serveur démarré sur http://localhost:${port}`);
-// });
 
 main();

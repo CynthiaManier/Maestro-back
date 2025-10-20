@@ -11,3 +11,30 @@ Content-Type: application/json
     "siret": "51234567891234",
     "localisation": "Pau"
 }
+
+### Récupérer les genres
+GET http://localhost:3000/api/admin/genre
+Content-Type: application/json
+
+
+### creation d'une genre
+POST http://localhost:3000/api/admin/genre
+Content-Type: application/json
+
+{
+    "label": "Pop Rock"
+}
+
+### Modification d'un genre
+PATCH http://localhost:3000/api/admin/genre/3
+Content-Type: application/json
+
+{
+    "label": "Classique"
+}
+
+### Suppression d'un genre 
+DELETE http://localhost:3000/api/admin/genre/3
+Content-Type: application/json
+
+

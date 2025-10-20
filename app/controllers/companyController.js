@@ -1,7 +1,7 @@
 import { User, Projet, Company, Preview, Genre } from "../models/index.js";
 
 const companyController = {
-    
+
     // GET /api/admin/company
     findAll: async (req, res) => {
         try {
@@ -14,6 +14,23 @@ const companyController = {
             }
         } catch (error) {
             console.error("Erreur lors de la recherche des entreprises", error);
+            res.status(500).json({error: "Erreur interne du serveur"});
+        }
+    },
+
+    // POST /api/company
+    create: async (req, res) => {
+        // console.log(req);
+        console.log(req.body);
+        
+        try {
+            const datas = req.body;
+            console.log(datas);
+            const newCompany = await Company.create(datas);
+            console.log(req.body);
+            res.status(201).json(newCompany);
+        } catch (error) {
+            console.error("Erreur lors de la création de l'entreprise : ", error);
             res.status(500).json({error: "Erreur interne du serveur"});
         }
     }

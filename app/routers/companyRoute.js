@@ -7,7 +7,7 @@ const companyRoute = express.Router();
 companyRoute.get('/admin/company', companyController.findAll)
 
 // POST /api/company
-
+companyRoute.post('/company', companyController.create)
 
 // PATCH /api/company/:idCompany
 

@@ -4,12 +4,15 @@ import sequelize from "./app/db/database.js";
 import Description from "./app/models/descriptionModel.js";
 import MessageContact from "./app/models/messageContactModel.js";
 import { User, Projet, Company, Preview, Genre } from "./app/models/index.js";
+import router from "./app/routers/router.js";
 
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+app.use(router);
 
 // Connexion à la base
 async function main() {

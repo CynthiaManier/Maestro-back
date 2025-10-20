@@ -1,9 +1,10 @@
-import express from 'express';
-import companyRoute from './companyRoute.js';
+import express from "express";
+import companyRoute from "./companyRoute.js";
+import userRoute from "./userRoute.js";
 
 const router = express.Router();
 
-
-router.use('/api', companyRoute);
+router.use("/api", companyRoute);
+router.use("/api", userRoute);
 
 export default router;

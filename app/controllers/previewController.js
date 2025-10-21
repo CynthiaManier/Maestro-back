@@ -18,8 +18,14 @@ const previewController = {
 
     findByFilter: async (req, res) => {
         try {
-            
-            
+            const genreSelected = req.query.genre;
+            const previews = await Preview.findAll({
+                where: {
+                    label: genreSelected
+                },
+                include: ["listGenres"]
+            });
+            res.json(previews);
         } catch (error) {
             console.error("Erreur lors de la recherche des extraits filtrés : ", error);
             res.status(500).json({error: "Erreur interne du serveur"});

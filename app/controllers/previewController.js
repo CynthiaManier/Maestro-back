@@ -17,10 +17,16 @@ const previewController = {
     },
 
     findByFilter: async (req, res) => {
+        console.log('in findByFilter');
+        console.log(req.query.genre);
+        console.log(req.query.orderByDate);
+        
         try {
             // if ...
-            const { genre, date } = req.query;
+            const { genre } = req.query;
             if (genre) {
+                console.log('in genre');
+                
                 const previews = await Preview.findAll({
                     include: [{
                         model: Genre,
@@ -28,17 +34,23 @@ const previewController = {
                         where: {
                             label: genre
                         }
-                    }]
+                    }],
+                    order: [['date', 'DESC']]
                 });
-            }
-
-            if (date) {
+                res.json(previews);
+            } else {
+                console.log("dans le if");
                 const previews = await Preview.findAll({
-                    order: [date, 'DESC']
-                    })
-                };
+                    order: [['date', 'DESC']]
+                })
+                console.log("après la recherche");
+                
+                res.json(previews);
+                console.log("après res.json");
+                
+            };
 
-            res.json(previews);
+            
         } catch (error) {
             console.error("Erreur lors de la recherche des extraits filtrés : ", error);
             res.status(500).json({error: "Erreur interne du serveur"});

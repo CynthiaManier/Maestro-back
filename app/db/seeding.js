@@ -52,15 +52,18 @@ try {
 
     await Preview.create({
         title: "Extrait 1",
-        isStar: false
+        isStar: false,
+        date: new Date("2025-01-01")
     }),
     await Preview.create({
         title: "Extrait 2",
-        isStar: false
+        isStar: false,
+        date: new Date("2025-03-03")
     }),
     await Preview.create({
         title: "Extrait 3",
-        isStar: true
+        isStar: true,
+        date: new Date("2025-05-05")
     })
 
     // messages-contact

@@ -4,7 +4,7 @@ import express from 'express';
 import messageContactRoute from './messageContactRoute.js';
 import previewRoute from './previewRoute.js';
 import genreRoute from './genreRouter.js';
-import portfolioRoute from './portfolioRoute.js';
+import descriptionRoute from "./descriptionRoute.js";
 
 const router = express.Router();
 
@@ -14,7 +14,7 @@ router.use('/api', companyRoute);
 router.use('/api', messageContactRoute);
 router.use('/api', previewRoute);
 router.use('/api', genreRoute );
-router.use('/api', portfolioRoute );
+router.use('/api', descriptionRoute );
 
 
 export default router;

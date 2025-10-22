@@ -1,6 +1,6 @@
 import { User, Projet, Company, Preview, Genre, Description } from "../models/index.js";
 
-const portfolioController = {
+const descriptionController = {
 
     // POST /api/admin/description
     create: async (req, res) => {
@@ -52,4 +52,4 @@ const portfolioController = {
     }
 };
 
-export default portfolioController;
+export default descriptionController;

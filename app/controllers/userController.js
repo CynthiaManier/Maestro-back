@@ -62,19 +62,107 @@ const userController = {
                 });
             }
 
-            const token = jwt.sign(
-                { userId: user.id, role: user.role },
+            const accessToken = jwt.sign(
+                { id: user.id, role: user.role },
                 JWT_SECRET,
                 { expiresIn: "1h" }
             );
 
+            // Création du refresh token (7 jours)
+            const refreshToken = jwt.sign(
+                { id: user.id, email: user.email },
+                process.env.REFRESH_SECRET,
+                { expiresIn: "7d" }
+            );
+
+            // Envoi du cookie access_token
+            res.cookie("access_token", accessToken, {
+                httpOnly: true, //  à true, il devient impossible d’y accéder depuis JS (front)
+                secure: false, //  Mettre true en production avec HTTPS
+                sameSite: "Strict", // Protège contre certaines attaques CSRF
+                maxAge: 60 * 60 * 1000, // 1 heure en millisecondes
+            });
+
+            // Envoi du cookie refresh_token
+            res.cookie("refresh_token", refreshToken, {
+                httpOnly: true,
+                secure: false,
+                sameSite: "Strict",
+                maxAge: 7 * 24 * 60 * 60 * 1000, // 7 jours
+            });
+
+            //  On renvoie les infos du user au frontend (sans mot de passe)
             res.json({
-                token: token,
-                role: user.role,
+                message: "Connexion réussie",
+                user: {
+                    id: user.id,
+                    name: user.name,
+                    email: user.email,
+                    role: user.role, // à vérifier
+                },
             });
         } catch (error) {
             console.error("Erreur lors de l'authentification: ", error);
             res.status(401).json({ error: "Unauthorized" });
+        }
+    },
+
+    refresh: async (req, res) => {
+        const refreshToken = req.cookies.refresh_token;
+        if (!refreshToken) {
+            return res.status(401).json({ message: "Pas de refresh token" });
+        }
+        try {
+            const decoded = jwt.verify(
+                refreshToken,
+                process.env.REFRESH_SECRET
+            );
+            const newAccessToken = jwt.sign(
+                { id: decoded.id, email: decoded.email },
+                process.env.JWT_SECRET,
+                { expiresIn: "1h" }
+            );
+            // Réécriture du cookie access_token
+            res.cookie("access_token", newAccessToken, {
+                httpOnly: true,
+                secure: false,
+                sameSite: "Strict",
+                maxAge: 60 * 60 * 1000,
+            });
+            res.json({ message: "Nouveau token généré 🔄" });
+        } catch {
+            res.status(403).json({
+                message: "Refresh token invalide ou expiré",
+            });
+        }
+    },
+
+    // Se déconnecter
+    logout: async (req, res) => {
+        res.clearCookie("access_token");
+        res.clearCookie("refresh_token");
+        res.json({ message: "Déconnexion effectuée" });
+    },
+
+    profile: async (req, res) => {
+        try {
+            //  Récupère l'utilisateur depuis la DB via son id dans le token
+            const user = await User.findByPk(req.user.id);
+            if (!user) {
+                return res
+                    .status(404)
+                    .json({ message: "Utilisateur introuvable" });
+            }
+            return res.json({
+                message: "Profil récupéré",
+                user: { id: user.id, name: user.name, email: user.email },
+            });
+        } catch (error) {
+            console.error(
+                "Erreur lors de la recupération des informations de l'utilisateur : ",
+                error
+            );
+            res.status(500).json({ error: "Erreur interne du serveur" });
         }
     },
 
@@ -84,10 +172,11 @@ const userController = {
 
         try {
             const user = await User.findByPk(req.user.id);
-            if (!user)
+            if (!user) {
                 return res
                     .status(404)
                     .json({ message: "Utilisateur introuvable" });
+            }
 
             const modifiedDatas = req.body;
             const { lastname, firstname, phonenumber, email, password } =

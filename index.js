@@ -5,6 +5,9 @@ import Description from "./app/models/descriptionModel.js";
 import MessageContact from "./app/models/messageContactModel.js";
 import { User, Projet, Company, Preview, Genre } from "./app/models/index.js";
 import router from "./app/routers/router.js";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import jwt from "jsonwebtoken";
 
 dotenv.config();
 
@@ -14,7 +17,14 @@ const port = process.env.PORT || 3000;
 // Permet de décoder le corps au format JSON de la requête HTTP
 app.use(express.json());
 
-// Routes
+app.use(cookieParser());
+app.use(
+    cors({
+        origin: "http://localhost:3000/", // Adresse du frontend
+        credentials: true, // Autorise lʼenvoi automatique des cookies
+    })
+);
+
 app.use(router);
 
 // Route racine

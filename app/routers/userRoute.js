@@ -1,5 +1,6 @@
 import express from "express";
 import userController from "../controllers/userController.js";
+import authenticate from "../middlewares/authMiddleware.js";
 
 const userRoute = express.Router();
 
@@ -11,13 +12,25 @@ userRoute.post("/user", userController.create);
 // POST/api/user/login
 userRoute.post("/user/login", userController.login);
 
+// Rafraichir le token
+// POST/api/user/refresh
+userRoute.post("/user/refresh", userController.refresh);
+
+// Se déconnecter
+// POST/api/user/logout
+userRoute.post("/user/logout", userController.logout);
+
+// Voir ses informations personnelles
+// GET/api/user/profile
+userRoute.get("/user/profile", authenticate, userController.profile);
+
 // Modifier ses informations
-// PATCH/api/user/:idUser
-userRoute.patch("/user/:idUser", userController.modify);
+// PATCH/api/user
+userRoute.patch("/user", authenticate, userController.modify);
 
 // Supprimer un utilisateur (désactiver)
-// DELETE/api/user/:idUser
-// userRoute.delete('/user/:idUser', userController.quelque chose)
+// DELETE/api/user
+// userRoute.delete('/user', userController.quelque chose)
 
 // Voir la liste des utilisateurs
 // GET/api/admin/user

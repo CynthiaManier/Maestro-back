@@ -41,6 +41,12 @@ User.init(
             allownull: false,
         },
 
+        // Adresse de l'utilisateur
+        localisation: {
+            type: DataTypes.STRING,
+            allownull: true,
+        },
+
         // Numero de telephone
         phonenumber: {
             type: DataTypes.STRING,

@@ -48,6 +48,18 @@ Content-Type: application/json
     "password": "gargouille2025"
 }
 
+### Modifier les informations
+PATCH http://localhost:3000/api/user
+Content-Type: application/json
+
+{
+    "lastname": "Cynthia",
+    "firstname": "Postgres",
+    "phonenumber": "01010101010",
+    "email": "emma.postgres@exemple.com",
+    "password": "gargouille2025"
+}
+
 ### authentification
 POST http://localhost:3000/api/user/login
 Content-Type: application/json
@@ -56,6 +68,10 @@ Content-Type: application/json
     "email": "emma.postgres@exemple.com",
     "password": "gargouille2025"
 }
+
+### Voir ses informations personnelles
+GET http://localhost:3000/api/user/profile
+Content-Type: application/json
 
 ### trier les user
 GET http://localhost:3000/api/admin/user/filter?lastnameSelected

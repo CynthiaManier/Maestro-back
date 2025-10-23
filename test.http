@@ -43,6 +43,14 @@ Content-Type: application/json
     "email": "emma.postgres@exemple.com",
     "password": "gargouille2025"
 }
+
+### trier les user
+GET http://localhost:3000/api/admin/user/filter?lastnameSelected
+Content-Type: application/json
+
+### lister les user
+GET http://localhost:3000/api/admin/user
+Content-Type: application/json
 ### Récupérer les messages
 GET http://localhost:3000/api/message-contact
 Content-Type: application/json
@@ -125,3 +133,10 @@ GET http://localhost:3000/api/project
 Content-Type: application/json
 
 
+### Récupérer tous les extraits filtrés par genre jazz
+GET http://localhost:3000/api/preview/filter?genre=jazz
+Content-Type: application/json
+
+### Récupérer tous les extraits triés par dates
+GET http://localhost:3000/api/preview/filter
+Content-Type: application/json

@@ -55,6 +55,17 @@ const previewController = {
             console.error("Erreur lors de la recherche des extraits filtrés : ", error);
             res.status(500).json({error: "Erreur interne du serveur"});
         }
+    },
+
+    addPreview: async (req, res) => {
+
+        const link = `${req.file.destination}${req.file.filename}`;
+        req.body.link = link;
+        // Je crois : ne pas oublier le title (et les autres champs) qui seront dans le req.body ?
+        const datas = req.body;
+        // dans le model Preview, ajout du link du fichier :
+        const newUpload = await Preview.create(datas);
+        res.status(201).json(newUpload);
     }
 
 

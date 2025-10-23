@@ -1,5 +1,6 @@
 import express from "express";
 import previewController from "../controllers/previewController.js";
+import { upload } from "../middlewares/uploadMiddleware.js";
 
 const previewRoute = express.Router();
 
@@ -8,5 +9,15 @@ previewRoute.get("/preview", previewController.findAll);
 
 // GET /api/preview/filter?
 previewRoute.get("/preview/filter", previewController.findByFilter);
+
+// POST /api/admin/preview
+previewRoute.post('/admin/preview', upload.single('preview'), previewController.addPreview);
+
+// PATCH /api/admin/preview + /:id à ajouter ?
+
+
+// DELETE /api/admin/preview + /:id à ajouter ?
+
+
 
 export default previewRoute;

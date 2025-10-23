@@ -28,9 +28,6 @@ async function main() {
         await sequelize.authenticate();
         console.log("✅ Connexion à la base réussie");
 
-        // Synchronisation des modèles sur la base, logging désactivé
-        await sequelize.sync({ alter: true, logging: false });
-
         app.listen(port, () => {
             console.log(`🚀 Serveur lancé sur http://localhost:${port}`);
         });

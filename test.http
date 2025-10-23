@@ -108,3 +108,10 @@ Content-Type: application/json
 DELETE http://localhost:3000/api/company/1
 Content-Type: application/json
 
+### Récupérer tous les extraits filtrés par genre jazz
+GET http://localhost:3000/api/preview/filter?genre=jazz
+Content-Type: application/json
+
+### Récupérer tous les extraits triés par dates
+GET http://localhost:3000/api/preview/filter
+Content-Type: application/json

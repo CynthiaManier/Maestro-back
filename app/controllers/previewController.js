@@ -58,14 +58,13 @@ const previewController = {
     },
 
     addPreview: async (req, res) => {
-
+        // dans ma variable link, je stock la destination et le filename définis dans uploadMiddleware
         const link = `${req.file.destination}${req.file.filename}`;
-        req.body.link = link;
-        // Je crois : ne pas oublier le title (et les autres champs) qui seront dans le req.body ?
+        // req.body correspondent aux champs de la requête
+        req.body.link = link; // req.body.link correspond maintenant à ma variable link, créée au-dessus
         const datas = req.body;
-        // dans le model Preview, ajout du link du fichier :
-        const newUpload = await Preview.create(datas);
-        res.status(201).json(newUpload);
+        const newUpload = await Preview.create(datas); // je crée newUpload grâce à datas
+        res.status(201).json(newUpload); // et ici on renvoie la réponse et son statut
     }
 
 

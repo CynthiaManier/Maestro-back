@@ -81,7 +81,6 @@ const previewController = {
             if (!preview) {
                 return res.status(404).json({message: 'Extrait non trouvé'});
             }
-            // preview.link
             await preview.update(datas);
             res.json(preview);
         } catch (error) {

@@ -18,6 +18,10 @@ Projet.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    resume: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+  },
     status: {
       type: DataTypes.ENUM(
         "à commencer",

@@ -1,11 +1,14 @@
 import express from 'express';
 import descriptionController from '../controllers/descriptionController.js';
+import { imageUpload } from '../middlewares/imageMiddleware.js';
 
 const descriptionRoute = express.Router();
 
+// GET /api/description
+descriptionRoute.get("/description", descriptionController.findAll);
 
 // POST /api/admin/description
-descriptionRoute.post('/admin/description', descriptionController.create)
+descriptionRoute.post('/admin/description', imageUpload.single('image'), descriptionController.create)
 
 // PATCH /api/admin/description/:id
 descriptionRoute.patch('/admin/description/:id', descriptionController.update)

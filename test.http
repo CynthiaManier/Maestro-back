@@ -159,6 +159,10 @@ GET http://localhost:3000/api/project
 Content-Type: application/json
 
 
+### Obtenir les descriptions
+GET http://localhost:3000/api/description
+Content-Type: application/json
+
 ### creation d'une description
 POST http://localhost:3000/api/admin/description
 Content-Type: application/json

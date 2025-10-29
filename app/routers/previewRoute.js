@@ -11,7 +11,7 @@ previewRoute.get("/preview", previewController.findAll);
 previewRoute.get("/preview/filter", previewController.findByFilter);
 
 // GET /api/preview pour les preview isStar pour la page d'accueil
-
+previewRoute.get("/preview/star", previewController.findStar);
 
 // POST /api/admin/preview
 previewRoute.post('/admin/preview', upload.single('preview'), previewController.addPreview);

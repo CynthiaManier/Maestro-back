@@ -26,13 +26,13 @@ User.init(
         // Nom de famille de l’utilisateur
         lastname: {
             type: DataTypes.STRING,
-            allownull: false,
+            allownull: true,
         },
 
         // Prénom de l’utilisateur
         firstname: {
             type: DataTypes.STRING,
-            allownull: false,
+            allownull: true,
         },
 
         // Mot de passe haché
@@ -50,7 +50,7 @@ User.init(
         // Numero de telephone
         phonenumber: {
             type: DataTypes.STRING,
-            allownull: false,
+            allownull: true,
             // unique: true,
         },
 

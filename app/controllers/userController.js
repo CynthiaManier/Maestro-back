@@ -12,7 +12,7 @@ const userController = {
         console.log(req.body);
         try {
             const userDatas = req.body;
-            const { lastname, firstname, phonenumber, email, password } =
+            const { email, password } =
                 userDatas;
 
             const passwordHashed = await bcrypt.hash(password, 10);
@@ -20,9 +20,6 @@ const userController = {
             console.log(passwordHashed);
 
             await User.create({
-                lastname,
-                firstname,
-                phonenumber,
                 email,
                 password: passwordHashed,
             });

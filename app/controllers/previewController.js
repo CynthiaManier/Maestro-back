@@ -20,6 +20,23 @@ const previewController = {
         }
     },
 
+    findStar: async (req, res) => {
+        try {
+            const previews = await Preview.findAll({
+                where: {
+                    isStar: true,
+                }});
+                if (previews.length > 0) {
+                    res.json(previews);
+                } else {
+                    res.status(404).json({message : "Aucun extrait trouvé"});
+                }
+        } catch (error) {
+            console.error("Erreur lors de la recherche des extraits star", error);
+            res.status(500).json({error: "Erreur interne du serveur"});
+        }
+    },
+
     findByFilter: async (req, res) => {
         console.log('in findByFilter');
         console.log(req.query.genre);

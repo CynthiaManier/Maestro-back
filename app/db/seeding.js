@@ -76,41 +76,26 @@ try {
 
     const passwordHashed1 = await bcrypt.hash("gargouille2026", 10);
     await User.create({
-        lastname: "Syntaxe",
-        firstname: "Robin",
-        phonenumber: "0102030405",
         email: "robin.syntaxe@exemple.com",
-        password: passwordHashed1,
+        password: passwordHashed1
     });
 
     const passwordHashed2 = await bcrypt.hash("gargouille2027", 10);
     await User.create({
-        lastname: "Script",
-        firstname: "Camille",
-        phonenumber: "0607080910",
         email: "camille.script@exemple.com",
-        password: passwordHashed2,
+        password: passwordHashed2
     });
 
     const passwordHashed3 = await bcrypt.hash("gargouille2028", 10);
     await User.create({
-        lastname: "Flexbox",
-        firstname: "Alex",
-        phonenumber: "1112131415",
         email: "alex.flexbox@exemple.com",
-        password: passwordHashed3,
-        localisation: "42 Rue du Console.log 69008 Lyon",
+        password: passwordHashed3
     });
 
     const passwordHashed4 = await bcrypt.hash("gargouille2029", 10);
     await User.create({
-        lastname: "Pixel",
-        firstname: "Zoé",
-        phonenumber: "1617181920",
         email: "zoé.pixel@exemple.com",
-        password: passwordHashed4,
-        localisation:
-            "2457 Boulevard de la Compatibilité Internavigateurs 38000 Code-sur-Loire ",
+        password: passwordHashed4
     });
 
 

@@ -41,9 +41,6 @@ POST http://localhost:3000/api/user
 Content-Type: application/json
 
 {
-    "lastname": "Emma",
-    "firstname": "Postgres",
-    "phonenumber": "01010101010",
     "email": "emma.postgres@exemple.com",
     "password": "gargouille2025"
 }

@@ -175,17 +175,13 @@ const userController = {
             }
 
             const modifiedDatas = req.body;
-            const { lastname, firstname, phonenumber, email, password } =
-                modifiedDatas;
-
-            const passwordHashed = await bcrypt.hash(password, 10);
+            const { lastname, firstname, phonenumber, email } = modifiedDatas;
 
             await user.update({
                 lastname,
                 firstname,
                 phonenumber,
                 email,
-                password: passwordHashed,
             });
             res.status(200).json({
                 status: 200,

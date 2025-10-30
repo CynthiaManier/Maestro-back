@@ -11,8 +11,8 @@ Content-Type: application/json
     "siret": "51234567891234",
     "localisation": "Pau"
 }
-### Récupérer les entreprises
-GET http://localhost:3000/api/admin/company
+### Récupérer l'entreprises de l'utilisateur
+GET http://localhost:3000/api/company/companyProfile
 Content-Type: application/json
 
 ### creation d'une entreprise
@@ -62,8 +62,8 @@ POST http://localhost:3000/api/user/login
 Content-Type: application/json
 
 {
-    "email": "emma.postgres@exemple.com",
-    "password": "gargouille2025"
+    "email": "camille.script@exemple.com",
+    "password": "gargouille2027"
 }
 
 ### Voir ses informations personnelles

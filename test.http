@@ -99,7 +99,7 @@ Content-Type: application/json
 }
 
 ### Récupérer les genres
-GET http://localhost:3000/api/admin/genre
+GET http://localhost:3000/api/genre
 Content-Type: application/json
 
 
@@ -129,7 +129,7 @@ GET http://localhost:3000/api/admin/project/
 Content-Type: application/json
 
 ### trier les projets par statuts
-GET http://localhost:3000/api/admin/project/filter?status=en attente d'acceptatio
+GET http://localhost:3000/api/admin/project/filter?status=en cours
 Content-Type: application/json
 
 ### modifier le statut
@@ -159,6 +159,10 @@ GET http://localhost:3000/api/project
 Content-Type: application/json
 
 
+### Obtenir les descriptions
+GET http://localhost:3000/api/description
+Content-Type: application/json
+
 ### creation d'une description
 POST http://localhost:3000/api/admin/description
 Content-Type: application/json
@@ -182,6 +186,11 @@ Content-Type: application/json
 ### Suppression d'une description
 DELETE http://localhost:3000/api/admin/description/2
 Content-Type: application/json
+
+### Récupérer tous les extraits star
+GET http://localhost:3000/api/preview/star
+Content-Type: application/json
+
 ### Récupérer tous les extraits filtrés par genre jazz
 GET http://localhost:3000/api/preview/filter?genre=jazz
 Content-Type: application/json

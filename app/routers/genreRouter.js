@@ -3,8 +3,8 @@ import genresController from '../controllers/genresController.js';
 
 const genreRoute = express.Router();
 
-// GET /api/admin/genre
-genreRoute.get('/admin/genre', genresController.getAllGenres)
+// GET /api/genre à la place de /api/admin/genre
+genreRoute.get('/genre', genresController.getAllGenres)
 
 // POST /api/admin/genre
 genreRoute.post('/admin/genre', genresController.addAGenre)

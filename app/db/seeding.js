@@ -127,6 +127,26 @@ try {
         label: "jazz",
     });
 
+    // Project
+    await Projet.create({
+        name: "Title 1",
+        resume: "Resume 1",
+        status: "en cours",
+        deadline: new Date("2025-05-05"),
+    });
+    await Projet.create({
+        name: "Title 2",
+        resume: "Resume 2",
+        status: "à commencer",
+        deadline: new Date("2025-05-05"),
+    });
+    await Projet.create({
+        name: "Title 3",
+        resume: "Resume 3",
+        status: "terminé",
+        deadline: new Date("2025-05-05"),
+    });
+
     const users = await User.findAll();
     const companies = await Company.findAll();
     const genres = await Genre.findAll();

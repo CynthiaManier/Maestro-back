@@ -25,7 +25,11 @@ const previewController = {
             const previews = await Preview.findAll({
                 where: {
                     isStar: true,
-                }});
+                },
+                include: [{
+                    model: Genre,
+                    as: "listGenres"
+                }]});
                 if (previews.length > 0) {
                     res.json(previews);
                 } else {

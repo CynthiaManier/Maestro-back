@@ -14,7 +14,7 @@ previewRoute.get("/preview/filter", previewController.findByFilter);
 previewRoute.get("/preview/star", previewController.findStar);
 
 // POST /api/admin/preview
-previewRoute.post('/admin/preview', upload.single('preview'), previewController.addPreview);
+previewRoute.post('/admin/preview', upload.single('previewFile'), previewController.addPreview);
 // upload.single() me permet d'accepter l'upload d'un fichier (un seul à la fois)
 // upload.single('preview') me permet d'aller chercher le fichier déposé dans l'input type='file' dont le name vaut 'preview'
 

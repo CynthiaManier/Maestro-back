@@ -87,7 +87,7 @@ const previewController = {
         const link = `${req.file.destination}${req.file.filename}`;
         // req.body correspondent aux champs de la requête
         req.body.link = link; // req.body.link correspond maintenant à ma variable link, créée au-dessus
-        const datas = req.body;
+        const datas = req.body; // dans req.body.title -> title name du form
         try {
             const newUpload = await Preview.create(datas); // je crée newUpload grâce à datas
             res.status(201).json(newUpload); // et ici on renvoie la réponse et son statut

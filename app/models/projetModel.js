@@ -7,6 +7,14 @@ import Preview from "./previewModel.js";
 
 class Projet extends Model {}
 
+export const STATUS = [ 
+  "à commencer",
+  "en cours",
+  "attente retour",
+  "terminé",
+  "attente acceptation"
+];
+
 Projet.init(
   {
     id: {
@@ -23,14 +31,8 @@ Projet.init(
       allowNull: false,
   },
     status: {
-      type: DataTypes.ENUM(
-        "à commencer",
-        "en cours",
-        "en attente de retour",
-        "terminé",
-        "en attente d'acceptation"
-      ),
-      defaultValue: "en attente d'acceptation",
+      type: DataTypes.ENUM(...STATUS),
+      defaultValue: "attente acceptation",
     },
     deadline: {
       type: DataTypes.DATEONLY,

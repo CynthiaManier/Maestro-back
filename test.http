@@ -155,7 +155,7 @@ Content-Type: application/json
 
 
 ### trier par statut
-GET http://localhost:3000/api/project
+GET http://localhost:3000/api/project/filter?status=en cours
 Content-Type: application/json
 
 

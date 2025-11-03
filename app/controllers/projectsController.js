@@ -90,11 +90,14 @@ const projectsController = {
     // Voir la liste de ses projets
     listProjects: async (req, res) => {
         try {
-            const projects = await Projet.findAll();
+            const projects = await Projet.findAll({ where: { user_id : req.user.id } });
+
+            // on récupère toutes les valeurs de status du projet
+            const Liststatus = Projet.getAttributes().status.values;
             if (projects.length > 0) {
-                res.json(projects);
+                res.json({projects,Liststatus});
             } else {
-                res.status(404).json({ message: "Aucun projet trouvé" });
+                res.status(200).json({projects: [], message: "Aucun projet trouvé"});
             }
         } catch (error) {
             console.error("Erreur lors de la recherche des projets :", error);
@@ -109,11 +112,13 @@ const projectsController = {
             return res.status(400).json({ message: "Paramètre de statut requis" });
         }
         try {
-            const projects = await Projet.findAll({ where: { status } });
+            // penser a filtrer aussi avec le user
+            const projects = await Projet.findAll({ where: { user_id : req.user.id, status: status} });
+
             if (projects.length > 0) {
-                res.json(projects);
+                res.json({projects, message: "Projet trouvé"});
             } else {
-                res.status(404).json({message: "Aucun projet trouvé avec ce statut",});
+                res.status(200).json({projects: [], message: "Aucun projet trouvé avec ce statut"});
             }
         } catch (error) {
             console.error("Erreur lors du filtrage par statut :", error);

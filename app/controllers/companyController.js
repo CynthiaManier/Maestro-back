@@ -47,9 +47,11 @@ const companyController = {
         console.log(req.body);
 
         try {
+            const user = await User.findByPk(req.user.id);
             const datas = req.body;
             console.log(datas);
             const newCompany = await Company.create(datas);
+            await newCompany.addListUsers([user]);
             console.log(req.body);
             res.status(201).json(newCompany);
         } catch (error) {

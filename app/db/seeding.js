@@ -96,7 +96,7 @@ try {
 
     const passwordHashed4 = await bcrypt.hash("gargouille2029", 10);
     await User.create({
-        email: "zoé.pixel@exemple.com",
+        email: "zoe.pixel@exemple.com",
         password: passwordHashed4,
     });
 

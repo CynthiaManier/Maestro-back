@@ -15,7 +15,7 @@ companyRoute.get(
 );
 
 // POST /api/company
-companyRoute.post("/company", companyController.create);
+companyRoute.post("/company", authenticate, companyController.create);
 
 // PATCH /api/company/:idCompany
 companyRoute.patch("/company", authenticate, companyController.update);

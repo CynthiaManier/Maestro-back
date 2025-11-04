@@ -1,7 +1,7 @@
 import {User, Projet, Company, Preview, Genre} from "../models/index.js";
 
 const projectsController = {
-    //Admin
+    //ADMIN
 
     // Voir toute la liste des projets
     getAllProjects : async (req, res) => {
@@ -73,7 +73,7 @@ const projectsController = {
         }
     },
 
-    //Client
+    //CLIENT
 
     // Faire une demande de projet
     askProject: async (req, res) => {

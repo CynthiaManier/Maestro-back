@@ -11,13 +11,14 @@ const projectRouter =  express.Router();
 // GET /api/admin/project
 projectRouter.get('/admin/project', authenticate,projectsController.getAllProjects)
 
+
 // Trier les projets par statuts
 // GET /api/admin/project/filter?
 projectRouter.get('/admin/project/filter', authenticate,projectsController.sortProjectsByStatus)
 
 //Modifier le statut
 // PATCH /api/admin/project/:idProjet
-projectRouter.patch('/admin/project:id', authenticate,projectsController.updateStatus)
+projectRouter.patch('/admin/project/:id', authenticate,projectsController.updateStatus)
 
 // Supprimer le projet
 // DELETE /api/admin/project/:idProjet

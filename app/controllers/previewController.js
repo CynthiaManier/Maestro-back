@@ -20,6 +20,31 @@ const previewController = {
         }
     },
 
+    findById: async (req, res) => {
+        try {
+            const preview = await Preview.findByPk(req.params.id, {
+                include: [{
+                    model: Genre,
+                    as: "listGenres"
+                }]
+            });
+            if (preview) {
+                res.json(preview);
+            } else {
+                return res.status(401).json({
+                    status: 401,
+                    message: "Aucun extrait trouvé",
+                });
+            }
+        } catch (error) {
+            console.error(
+                "Erreur lors de la recherche d'un extrait",
+                error
+            );
+            res.status(500).json({ error: "Erreur interne du serveur" });
+        }
+    },
+
     findStar: async (req, res) => {
         try {
             const previews = await Preview.findAll({

@@ -22,7 +22,7 @@ projectRouter.patch('/admin/project/:id', authenticate,projectsController.update
 
 // Supprimer le projet
 // DELETE /api/admin/project/:idProjet
-projectRouter.delete('/admin/project:id', authenticate,projectsController.deleteProject)
+projectRouter.delete('/admin/project/:id', authenticate,projectsController.deleteProject)
 
 
 //CLIENT : 

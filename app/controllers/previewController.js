@@ -138,6 +138,19 @@ const previewController = {
             if (!preview) {
                 return res.status(404).json({message: 'Extrait non trouvé'});
             }
+
+            // on réinitialise les genres associés
+            await preview.setListGenres([]);
+            // on sauvegarde d'abord pour éviter les conflits
+            await preview.save();
+
+            // on ajoute les nouveaux genres
+            for (const genre of Array.from((req.body.genres).split(","))) {
+                const selectedGenre = await Genre.findByPk(genre); // il faut l'object en entier (genre find by pk)
+                // et je renvoie dans addListGenres le find by pk
+                await preview.addListGenres([selectedGenre]);
+            }
+
             await preview.update(datas);
             res.json(preview);
         } catch (error) {

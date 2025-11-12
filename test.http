@@ -71,7 +71,7 @@ GET http://localhost:3000/api/user/profile
 Content-Type: application/json
 
 ### trier les user
-GET http://localhost:3000/api/admin/user/filter?lastnameSelected
+GET http://localhost:3000/api/admin/user/filter?by=lastnameSelected
 Content-Type: application/json
 
 ### lister les user

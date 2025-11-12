@@ -251,16 +251,28 @@ const userController = {
     // Trier les utilisateurs
     sort: async (req, res) => {
         try {
-            const { lastnameSelected, firstnameSelected } = req.query;
-            if (lastnameSelected) {
+            const { by } = req.query;
+            if (by == "lastnameSelected") {
                 const usersSorted = await User.findAll({
-                    order: [["lastname", "DESC"]],
+                    include: [
+                        {
+                            model: Company,
+                            as: "company",
+                        },
+                    ],
+                    order: [["lastname", "ASC"]],
                 });
                 res.json(usersSorted);
             }
-            if (firstnameSelected) {
+            if (by == "firstnameSelected") {
                 const usersSorted = await User.findAll({
-                    order: [["firstname", "DESC"]],
+                    include: [
+                        {
+                            model: Company,
+                            as: "company",
+                        },
+                    ],
+                    order: [["firstname", "ASC"]],
                 });
                 res.json(usersSorted);
             }

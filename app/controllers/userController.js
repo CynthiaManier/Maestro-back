@@ -196,14 +196,47 @@ const userController = {
         }
     },
 
-    // Supprimer un utilisateur (désactiver)
-    // DELETE/api/user/:idUser
-    // userRoute.delete('/user/:idUser', userController.quelque chose)
+    // Désactiver un utilisateur
+    // PATCH/api/admin/user/:idUser
+    // userRoute.patch("/admin/user/:id", userController.desable)
+
+    disable: async (req, res) => {
+        try {
+            const user = await User.findByPk(req.params.id);
+            if (!user) {
+                return res
+                    .status(404)
+                    .json({ message: "Utilisateur introuvable" });
+            }
+
+            const modifieIsActive = req.body;
+            console.log("req.body : ", req.body);
+            const { isActive } = modifieIsActive;
+
+            await user.update({
+                isActive,
+            });
+            res.status(200).json({
+                status: 200,
+                message: "Status du compte modifié avec succes",
+            });
+        } catch (error) {
+            console.error(
+                "Erreur lors de la modification status du compte : ",
+                error
+            );
+            res.status(500).json({ error: "Erreur interne du serveur" });
+        }
+    },
 
     // Voir la liste des utilisateurs
     findAll: async (req, res) => {
         try {
             const users = await User.findAll({
+                where: {
+                    isActive: true,
+                },
+
                 include: [
                     {
                         model: Company,
@@ -254,6 +287,9 @@ const userController = {
             const { by } = req.query;
             if (by == "lastnameSelected") {
                 const usersSorted = await User.findAll({
+                    where: {
+                        isActive: true,
+                    },
                     include: [
                         {
                             model: Company,

@@ -42,7 +42,9 @@ const userController = {
             const loginDatas = req.body;
             const { email, password } = loginDatas;
 
-            const user = await User.findOne({ where: { email } });
+            const user = await User.findOne({
+                where: { email, isActive: true },
+            });
             if (!user) {
                 return res.status(401).json({
                     status: 401,
@@ -175,14 +177,9 @@ const userController = {
             }
 
             const modifiedDatas = req.body;
-            const { lastname, firstname, phonenumber, email } = modifiedDatas;
+            // const { lastname, firstname, phonenumber, email } = modifiedDatas;
 
-            await user.update({
-                lastname,
-                firstname,
-                phonenumber,
-                email,
-            });
+            await user.update(modifiedDatas);
             res.status(200).json({
                 status: 200,
                 message: "Information successfully modified",
@@ -197,9 +194,6 @@ const userController = {
     },
 
     // Désactiver un utilisateur
-    // PATCH/api/admin/user/:idUser
-    // userRoute.patch("/admin/user/:id", userController.desable)
-
     disable: async (req, res) => {
         try {
             const user = await User.findByPk(req.params.id);

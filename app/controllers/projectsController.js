@@ -30,8 +30,9 @@ const projectsController = {
                 return res.status(400).json({ message: "Le paramètre 'status' est requis" });
             }
             const projects = await Projet.findAll({where: { status }});
+            const Liststatus = Projet.getAttributes().status.values;
             if (projects.length > 0) {
-                res.json(projects);
+                res.json({projects, Liststatus});
             } else {
                 res.status(404).json({
                     message: "Aucun projet trouvé pour ce statut",

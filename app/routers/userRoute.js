@@ -32,13 +32,17 @@ userRoute.patch("/user", authenticate, userController.modify);
 // DELETE/api/user
 // userRoute.delete('/user', userController.quelque chose)
 
+// Désactiver un utilisateur
+// PATCH/api/admin/user/:idUser
+userRoute.patch("/admin/user/:id", userController.disable);
+
 // Voir la liste des utilisateurs
 // GET/api/admin/user
 userRoute.get("/admin/user", userController.findAll);
 
 // Trier les utilisateurs
 // GET/api/admin/user/(filtre)
-userRoute.get("/admin/user/filter", userController.sort);
+userRoute.get("/admin/user/filter", authenticate, userController.sort);
 
 // Voir un seul utilisateur
 // GET/api/admin/user/:idUser

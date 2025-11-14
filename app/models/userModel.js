@@ -59,6 +59,12 @@ User.init(
             type: DataTypes.ENUM("client", "admin"),
             defaultValue: "client",
         },
+
+        // Compte actif ou pas
+        isActive: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: true,
+        },
     },
     {
         sequelize,

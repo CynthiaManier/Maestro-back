@@ -7,7 +7,7 @@ const storage = multer.diskStorage({
     },
     filename: (req, file, cb) => { // ici je 'modélise' le filename
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9) // on va ajouter un suffixe (avec une date et des nombres aléatoires) pour le nom du fichier
-        cb(null, file.originalname + '-' + uniqueSuffix) // mon filename sera donc le fieldname (name du form) suivi d'un '-' puis du suffixe créé au-dessus (uniqueSuffix)
+        cb(null, (uniqueSuffix + '-' + file.originalname).replace(/[^a-zA-Z0-9.]/g, '')) // mon filename sera donc le fieldname (name du form) suivi d'un '-' puis du suffixe créé au-dessus (uniqueSuffix)
     }
 });
 

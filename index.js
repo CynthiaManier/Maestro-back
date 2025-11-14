@@ -27,6 +27,8 @@ app.use(
 
 app.use('/uploads', express.static('uploads'));
 
+app.use('/imagesUploads', express.static('imageUploads'));
+
 app.use(router);
 
 // Route racine

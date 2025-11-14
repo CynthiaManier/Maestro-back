@@ -62,8 +62,8 @@ POST http://localhost:3000/api/user/login
 Content-Type: application/json
 
 {
-    "email": "camille.script@exemple.com",
-    "password": "gargouille2027"
+    "email": "robin.syntaxe@exemple.com",
+    "password": "gargouille2026"
 }
 
 ### Voir ses informations personnelles
@@ -71,7 +71,7 @@ GET http://localhost:3000/api/user/profile
 Content-Type: application/json
 
 ### trier les user
-GET http://localhost:3000/api/admin/user/filter?lastnameSelected
+GET http://localhost:3000/api/admin/user/filter?by=lastnameSelected
 Content-Type: application/json
 
 ### lister les user
@@ -81,6 +81,14 @@ Content-Type: application/json
 ### Récuperer 1 user
 GET http://localhost:3000/api/admin/user/2
 Content-Type: application/json
+
+### Désactiver un user (admin)
+PATCH http://localhost:3000/api/admin/user/2
+Content-Type: application/json
+
+{
+    "isActive": false
+}
 
 ### Récupérer les messages
 GET http://localhost:3000/api/message-contact

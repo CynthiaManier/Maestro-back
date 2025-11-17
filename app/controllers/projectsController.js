@@ -83,6 +83,7 @@ const projectsController = {
     // Faire une demande de projet
     askProject: async (req, res) => {
         const datas = req.body;
+        datas.user_id = req.user.id;
         try {
             const newProjet = await Projet.create(datas);
             res.json(newProjet);
@@ -117,11 +118,13 @@ const projectsController = {
             return res.status(400).json({ message: "Paramètre de statut requis" });
         }
         try {
-            // penser a filtrer aussi avec le user
             const projects = await Projet.findAll({ where: { user_id : req.user.id, status: status} });
 
+            // on récupère toutes les valeurs de status du projet
+            const Liststatus = Projet.getAttributes().status.values;
+
             if (projects.length > 0) {
-                res.json({projects, message: "Projet trouvé"});
+                res.json({projects, Liststatus, message: "Projet trouvé"});
             } else {
                 res.status(200).json({projects: [], message: "Aucun projet trouvé avec ce statut"});
             }

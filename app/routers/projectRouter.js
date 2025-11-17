@@ -29,7 +29,7 @@ projectRouter.delete('/admin/project/:id', authenticate,projectsController.delet
 
 // Faire une demande de projet
 // POST /api/project
-projectRouter.post('/project', projectsController.askProject)
+projectRouter.post('/project', authenticate, projectsController.askProject)
 
 
 // Voir la liste de ses projets

@@ -12,12 +12,12 @@ import jwt from "jsonwebtoken";
 // ==========================================================
 // ⚙️ Configuration de dotenv
 // ==========================================================
-dotenv.config();  // Permet d'accéder aux variables définies dans .env via process.env
+dotenv.config(); // Permet d'accéder aux variables définies dans .env via process.env
 
 // ==========================================================
 // 🚀 Initialisation d'Express
 // ==========================================================
-const app = express();                // Crée une application Express
+const app = express(); // Crée une application Express
 const port = process.env.PORT || 3000; // Définit le port (priorité à la variable .env, sinon 3000)
 
 // Permet de décoder le corps au format JSON de la requête HTTP
@@ -26,14 +26,14 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
     cors({
-        origin: "http://localhost:5173",
+        origin: process.env.CLIENT_URL,
         credentials: true, // Autorise lʼenvoi automatique des cookies
     })
 );
 
-app.use('/imagesUploads', express.static('app/imageUploads'));
+app.use("/imagesUploads", express.static("app/imageUploads"));
 
-app.use('/uploads', express.static('uploads'));
+app.use("/uploads", express.static("uploads"));
 
 app.use(router);
 

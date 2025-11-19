@@ -45,6 +45,7 @@ Content-Type: application/json
     "password": "gargouille2025",
 }
 
+
 ### Modifier les informations
 PATCH http://localhost:3000/api/user
 Content-Type: application/json

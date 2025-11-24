@@ -12,7 +12,7 @@ const previewController = {
             if (previews.length > 0) {
                 res.json(previews);
             } else {
-                res.status(404).json({message : "Aucun extrait trouvé"});
+                res.json({message : "Aucun extrait trouvé"});
             }
         } catch (error) {
             console.error("Erreur lors de la recherche des extraits", error);
@@ -31,10 +31,7 @@ const previewController = {
             if (preview) {
                 res.json(preview);
             } else {
-                return res.status(401).json({
-                    status: 401,
-                    message: "Aucun extrait trouvé",
-                });
+                return res.json({message : "Aucun extrait trouvé"});
             }
         } catch (error) {
             console.error(
@@ -58,7 +55,7 @@ const previewController = {
                 if (previews.length > 0) {
                     res.json(previews);
                 } else {
-                    res.status(404).json({message : "Aucun extrait trouvé"});
+                    res.json({message : "Aucun extrait trouvé"});
                 }
         } catch (error) {
             console.error("Erreur lors de la recherche des extraits star", error);

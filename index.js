@@ -1,5 +1,6 @@
 import * as dotenv from "dotenv";
 import express from "express";
+import rateLimit from "express-rate-limit";
 import sequelize from "./app/db/database.js";
 import Description from "./app/models/descriptionModel.js";
 import MessageContact from "./app/models/messageContactModel.js";
@@ -8,6 +9,8 @@ import router from "./app/routers/router.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import jwt from "jsonwebtoken";
+
+
 
 
 // Configuration de dotenv
@@ -33,10 +36,11 @@ app.use('/imagesUploads', express.static('app/imageUploads'));
 
 app.use('/uploads', express.static('uploads'));
 
-// WIP --------------
+
+// SECURITE : middleware sert à limiter le nombre de requêtes qu’un client peut faire
 app.use(rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100
+    windowMs: 15 * 60 * 1000, //  15 minutes
+    max: 100 // nb maximum de requêtes
     }));
 
 app.use(router);

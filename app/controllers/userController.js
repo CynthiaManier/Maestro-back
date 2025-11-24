@@ -19,6 +19,9 @@ const userController = {
 
                 // nettoyage de l'email avec SANITIZE
                 const cleanEmail = sanitizeHtml(req.body.email);
+                // TEST SECURITY console
+                // console.log("Email avant :", req.body.email);
+                // console.log("Email après :", cleanEmail);
 
                 // HASH du mot de passe
                 const passwordHashed = await bcrypt.hash(password, 10);

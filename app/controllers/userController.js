@@ -137,20 +137,16 @@ const userController = {
 
     // Se déconnecter
     logout: async (req, res) => {
-        res.clearCookie("access_token",
-            {
+        res.clearCookie("access_token", {
             httpOnly: true,
             secure: false,
             sameSite: "Strict",
-            }
-        );
-        res.clearCookie("refresh_token",
-            {
+        });
+        res.clearCookie("refresh_token", {
             httpOnly: true,
             secure: false,
             sameSite: "Strict",
-            }
-        );
+        });
         res.json({ message: "Déconnexion effectuée" });
     },
 
@@ -160,7 +156,7 @@ const userController = {
             const user = await User.findByPk(req.user.id);
             if (!user) {
                 return res
-                    .status(404)
+                    .status(400)
                     .json({ message: "Utilisateur introuvable" });
             }
             return res.json({
@@ -184,7 +180,7 @@ const userController = {
             const user = await User.findByPk(req.user.id);
             if (!user) {
                 return res
-                    .status(404)
+                    .status(400)
                     .json({ message: "Utilisateur introuvable" });
             }
 
@@ -211,7 +207,7 @@ const userController = {
             const user = await User.findByPk(req.params.id);
             if (!user) {
                 return res
-                    .status(404)
+                    .status(400)
                     .json({ message: "Utilisateur introuvable" });
             }
 
@@ -253,7 +249,7 @@ const userController = {
             if (users.length > 0) {
                 res.json(users);
             } else {
-                res.status(404).json({ message: "Aucun utilisateur trouvé" });
+                res.status(400).json({ message: "Aucun utilisateur trouvé" });
             }
         } catch (error) {
             console.error(
@@ -270,7 +266,7 @@ const userController = {
             const user = await User.findByPk(req.params.id);
             if (!user) {
                 return res
-                    .status(404)
+                    .status(400)
                     .json({ message: "Utilisateur introuvable" });
             }
             console.log(user);

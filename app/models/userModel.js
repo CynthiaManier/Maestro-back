@@ -39,9 +39,6 @@ User.init(
         password: {
             type: DataTypes.STRING,
             allownull: false,
-            // validate: {
-            //     is: "/^(?=.*d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm",
-            // },
         },
 
         // Adresse de l'utilisateur

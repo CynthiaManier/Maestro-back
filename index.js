@@ -10,12 +10,8 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import jwt from "jsonwebtoken";
 
-
-
-
 // Configuration de dotenv
 dotenv.config(); // Permet d'accéder aux variables définies dans .env via process.env
-
 
 // Initialisation d'Express
 const app = express(); // Crée une application Express
@@ -27,21 +23,22 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
     cors({
-            origin: "http://localhost:5173",
+        origin: process.env.CLIENT_URL,
         credentials: true, // Autorise lʼenvoi automatique des cookies
     })
 );
 
-app.use('/imagesUploads', express.static('imageUploads'));
+app.use("/imagesUploads", express.static("imageUploads"));
 
-app.use('/uploads', express.static('uploads'));
-
+app.use("/uploads", express.static("uploads"));
 
 // SECURITE : middleware sert à limiter le nombre de requêtes qu’un client peut faire
-app.use(rateLimit({
-    windowMs: 15 * 60 * 1000, //  15 minutes
-    max: 500// nb maximum de requêtes
-    }));
+app.use(
+    rateLimit({
+        windowMs: 15 * 60 * 1000, //  15 minutes
+        max: 500, // nb maximum de requêtes
+    })
+);
 
 app.use(router);
 

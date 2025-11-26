@@ -4,45 +4,43 @@ import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import sanitizeHtml from "sanitize-html";
 
-
 dotenv.config();
 const JWT_SECRET = process.env.JWT_SECRET;
 
 const userController = {
+    // Créer un nouvel utilisateur
+    create: async (req, res) => {
+        console.log(req.body);
+        try {
+            // récupération du mail & password par le front
+            const { email, password } = req.body;
 
-        // Créer un nouvel utilisateur
-        create: async (req, res) => {
-            console.log(req.body);
-            try {     
-                // récupération du mail & password par le front           
-                const { email, password } = req.body;
+            // nettoyage de l'email avec SANITIZE
+            const cleanEmail = sanitizeHtml(req.body.email);
+            // TEST SECURITY console
+            // console.log("Email avant :", req.body.email);
+            // console.log("Email après :", cleanEmail);
 
-                // nettoyage de l'email avec SANITIZE
-                const cleanEmail = sanitizeHtml(req.body.email);
-                // TEST SECURITY console
-                // console.log("Email avant :", req.body.email);
-                // console.log("Email après :", cleanEmail);
+            // HASH du mot de passe
+            const passwordHashed = await bcrypt.hash(password, 10);
 
-                // HASH du mot de passe
-                const passwordHashed = await bcrypt.hash(password, 10);
-                
-                await User.create({
-                    // données sécurisées
-                    email: cleanEmail,
-                    password: passwordHashed,
-                });
-                res.status(201).json({
-                    status: 201,
-                    message: "User successfully created",
-                });
-            } catch (error) {
-                console.error(
-                    "Erreur lors de la création de l'utilisateur : ",
-                    error
-                );
-                res.status(500).json({ error: "Erreur interne du serveur" });
-            }
-        },
+            await User.create({
+                // données sécurisées
+                email: cleanEmail,
+                password: passwordHashed,
+            });
+            res.status(201).json({
+                status: 201,
+                message: "User successfully created",
+            });
+        } catch (error) {
+            console.error(
+                "Erreur lors de la création de l'utilisateur : ",
+                error
+            );
+            res.status(500).json({ error: "Erreur interne du serveur" });
+        }
+    },
 
     // Connexion
     login: async (req, res) => {
@@ -85,16 +83,16 @@ const userController = {
             // Envoi du cookie access_token
             res.cookie("access_token", accessToken, {
                 httpOnly: true, //  à true, il devient impossible d’y accéder depuis JS (front)
-                secure: false, //  Mettre true en production avec HTTPS
-                sameSite: "Strict", // Protège contre certaines attaques CSRF
+                secure: true, //  Mettre true en production avec HTTPS
+                sameSite: "none", // Protège contre certaines attaques CSRF
                 maxAge: 60 * 60 * 1000, // 1 heure en millisecondes
             });
 
             // Envoi du cookie refresh_token
             res.cookie("refresh_token", refreshToken, {
                 httpOnly: true,
-                secure: false,
-                sameSite: "Strict",
+                secure: true,
+                sameSite: "none",
                 maxAge: 7 * 24 * 60 * 60 * 1000, // 7 jours
             });
 
@@ -132,8 +130,8 @@ const userController = {
             // Réécriture du cookie access_token
             res.cookie("access_token", newAccessToken, {
                 httpOnly: true,
-                secure: false,
-                sameSite: "Strict",
+                secure: true,
+                sameSite: "none",
                 maxAge: 60 * 60 * 1000,
             });
             res.json({ message: "Nouveau token généré" });
@@ -148,13 +146,13 @@ const userController = {
     logout: async (req, res) => {
         res.clearCookie("access_token", {
             httpOnly: true,
-            secure: false,
-            sameSite: "Strict",
+            secure: true,
+            sameSite: "none",
         });
         res.clearCookie("refresh_token", {
             httpOnly: true,
-            secure: false,
-            sameSite: "Strict",
+            secure: true,
+            sameSite: "none",
         });
         res.json({ message: "Déconnexion effectuée" });
     },
